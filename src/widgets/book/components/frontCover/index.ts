@@ -1,0 +1,1 @@
+export { FrontCover3D } from './ui/FrontCover'

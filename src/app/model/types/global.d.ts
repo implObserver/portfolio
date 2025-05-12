@@ -8,3 +8,7 @@ declare module '*.webp';
 declare module '*.svg';
 declare module '*.png';
 declare module '*.json';
+
+interface ImportMeta {
+  glob: (glob: string) => Record<string, () => Promise<JSX.Element>>;
+}
