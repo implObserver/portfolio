@@ -12,6 +12,13 @@ export type Project = {
     stack: string[];
 };
 
+export const emptyProject: Project = {
+    imageUrl: '',
+    siteUrl: '',
+    githubUrl: '',
+    description: 'Место для еще одного проекта! ;)',
+    stack: [''],
+}
 export const projects: Project[] = [
     {
         imageUrl: ticTacToeImage3,

@@ -13,7 +13,7 @@ export const BackCover3D = ({ positionZ }: { positionZ: number }) => {
         z: book.isOpen
             ? -0.1
             : book.isFinished
-                ? book.total_leave * 0.1 + 0.1
+                ? (book.total_leave + 5) * book.baze_z * 2
                 : positionZ,
         config: { mass: 1, tension: 120, friction: 30 },
         onStart: () => dispatch(bookActions.startAnimation()),
@@ -22,7 +22,7 @@ export const BackCover3D = ({ positionZ }: { positionZ: number }) => {
 
     const handleClick = (e: ThreeEvent<MouseEvent>) => {
         e.stopPropagation();
-        if (book.currentLeave !== 0) return;
+        if (book.currentLeave !== -1) return;
         dispatch(book.isOpen ? bookActions.closeBook(true) : bookActions.openBook());
     };
 
@@ -35,7 +35,7 @@ export const BackCover3D = ({ positionZ }: { positionZ: number }) => {
             onClick={handleClick}
         >
             <mesh position={[-2, 0, 0]}>
-                <boxGeometry args={[4, 6, 0.2]} />
+                <boxGeometry args={[4, 6, 0.1]} />
                 <meshStandardMaterial color="#333" />
             </mesh>
         </animated.group>

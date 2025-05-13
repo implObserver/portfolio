@@ -1,0 +1,1 @@
+export { LitImage } from './ui/LitImageProps'

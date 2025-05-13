@@ -53,14 +53,23 @@ export const FrontCover3D = ({ positionZ }: { positionZ: number }) => {
             onClick={handleClick}
         >
             <mesh position={[-2, 0, 0]}>
-                <boxGeometry args={[4, 6, 0.2]} />
+                <boxGeometry args={[4, 6, 0.1]} />
+
+                {/* Массив материалов: [right, left, top, bottom, front, back] */}
+                {/** Только передняя сторона (index 4) будет с текстурой */}
+                <meshStandardMaterial attach="material-3" color="#888" />
+                <meshStandardMaterial attach="material-0" color="#888" />
+                <meshStandardMaterial attach="material-1" color="#888" />
+                <meshStandardMaterial attach="material-2" color="#888" />
                 <meshStandardMaterial
+                    attach="material-5"
                     ref={textureRef}
-                    color="#ffffff" // Белый цвет лучше подходит для текстур
+                    color="#ffffff"
                     side={THREE.FrontSide}
                     roughness={0.5}
                     metalness={0.1}
                 />
+                <meshStandardMaterial attach="material-4" color="#888" />
             </mesh>
         </animated.group>
     );
