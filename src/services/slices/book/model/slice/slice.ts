@@ -23,11 +23,14 @@ const bookSlice = createSlice({
             state.isAnimating = false
         },
         setCurrentPage: (state, action: PayloadAction<number>) => {
-            state.currentPage = action.payload;
+            if (action.payload <= state.total_leave * 2 && action.payload >= -1)
+                state.currentPage = action.payload;
         },
         setCurrentLeave: (state, action: PayloadAction<number>) => {
-            state.prevLeave = state.currentLeave;
-            state.currentLeave = action.payload;
+            if (action.payload <= state.total_leave && action.payload >= -1) {
+                state.prevLeave = state.currentLeave;
+                state.currentLeave = action.payload;
+            }
         },
         setBookmark: (state, action: PayloadAction<boolean>) => {
             state.isBookmark = action.payload;

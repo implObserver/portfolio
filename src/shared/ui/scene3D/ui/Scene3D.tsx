@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { Suspense, useMemo } from 'react';
-import { Environment, Html, Text } from '@react-three/drei';
+import { ContactShadows, Environment, Html, Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { useSpring, animated } from '@react-spring/three';
 import { generateRandomText } from '../lib/const/texts';
@@ -15,8 +15,8 @@ export const FoggyScene = ({ children }: FoggySceneProps) => {
     numLines: 12,
     textColor: 'rgba(255, 255, 255, 0.6)',
     minTextSize: 0.5,
-    maxTextSize: 2,
-    minSpeed: 0.6,
+    maxTextSize: 3,
+    minSpeed: 0.3,
     maxSpeed: 1.2,
     minDelay: 0,
     maxDelay: 1,
@@ -42,12 +42,13 @@ export const FoggyScene = ({ children }: FoggySceneProps) => {
       <Canvas
         camera={{ position: [0, 0, 10], fov: 50 }}
         onCreated={({ scene }) => {
-          scene.fog = new THREE.FogExp2('#111820', 0.05);
+          scene.fog = new THREE.FogExp2('#111820', 0.08);
           scene.background = new THREE.Color('#111820');
         }}
       >
-        <ambientLight intensity={1} />
-        <directionalLight position={[5, 10, 5]} intensity={1} castShadow />
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[5, 10, 5]} intensity={0.5} castShadow />
+
         <Suspense fallback={<Html>Загрузка...</Html>}>
           {children}
         </Suspense>
@@ -68,6 +69,16 @@ export const FoggyScene = ({ children }: FoggySceneProps) => {
             zPosition={config.zPosition}
           />
         ))}
+
+        {/* Контактные тени для мягких реалистичных теней от объектов */}
+        <ContactShadows
+          opacity={0.4}
+          scale={10}
+          blur={2}
+          far={10}
+          rotation-x={Math.PI / 2}
+          position={[0, -0.01, 0]}
+        />
       </Canvas>
     </div>
   );
@@ -119,3 +130,4 @@ const MovingText = ({
     </animated.group>
   );
 };
+

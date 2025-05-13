@@ -15,9 +15,9 @@ export const initialState: BookState = {
     isAnimating: false,
     isFinished: false,
     currentPage: 0,
-    total_leave: 3,
-    currentLeave: 3,
-    prevLeave: 1,
+    total_leave: 12,
+    currentLeave: 13,
+    prevLeave: 0,
     isBookmark: false,
     baze_z: 0.05,
 }

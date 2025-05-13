@@ -1,8 +1,7 @@
 export const contents = [
-  { title: "Введение", pageNumber: 1, icon: "📖" },
-  { title: "Глава 1", pageNumber: 5, icon: "🧠" },
-  { title: "Глава 2", pageNumber: 12, icon: "⚙️" },
-  { title: "Приложения", pageNumber: 20, icon: "📎" },
-  { title: "Заключение", pageNumber: 25, icon: "🏁" },
+  { title: "Профессиональная деятельность", pageNumber: 1, icon: "📖" },
+  { title: "Тестовые задания", pageNumber: 6, icon: "🧠" },
+  { title: "Пет-проекты", pageNumber: 13, icon: "⚙️" },
+  { title: "Сайты-визитки", pageNumber: 20, icon: "📎" },
   // ... до 10 элементов
 ];

@@ -14,7 +14,7 @@ export default function HomePage() {
                         width: "100%",
                         height: "100%",
 
-                        backgroundPosition: "60% 30%",
+                        backgroundPosition: "40% 30%",
                     }}
                 />
             </div>

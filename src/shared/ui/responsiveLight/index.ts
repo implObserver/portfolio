@@ -1,0 +1,1 @@
+export { ResponsiveSpotLight } from './ui/ResponsiveLight'

@@ -3,17 +3,16 @@ import { animated, useSpring } from '@react-spring/three';
 import * as THREE from 'three';
 import { useThree } from '@react-three/fiber';
 import { useSelector } from 'react-redux';
-
 import { Spine3D } from '../components/spine';
 import { FrontCover3D } from '../components/frontCover';
 import { BackCover3D } from '../components/backCover';
 import { Page3D } from '../components/page';
-
 import { bookActions, selectBook } from '@/services/slices/book';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { projects } from '../lib/const/projects';
+import { projects, type Project } from '../lib/const/projects';
 import { ContentsPage3D } from '../components/contentsPage';
 import { contents } from '../lib/const/pages';
+import { ResponsiveSpotLight } from '@/shared/ui/responsiveLight';
 
 const MIN_ZOOM = 0.8;
 const MAX_ZOOM = 1.3;
@@ -22,11 +21,9 @@ const BASE_CAMERA_Z = 10;
 export const Book3D = () => {
     const groupRef = useRef<THREE.Group>(null);
     const lastPosition = useRef({ x: 0, y: 0 });
-
     const { camera } = useThree();
     const book = useSelector(selectBook);
     const dispatch = useAppDispatch();
-
     const [zoom, setZoom] = useState(1);
     const [rotationY, setRotationY] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
@@ -107,6 +104,9 @@ export const Book3D = () => {
             rotation={[0, rotationY, 0]}
             scale={scale} // Применяем масштаб
         >
+            {book.isOpen && (
+                <ResponsiveSpotLight />
+            )}
             <animated.group position-x={positionX}>
                 <Spine3D />
                 <BackCover3D positionZ={-book.baze_z} />
@@ -116,15 +116,23 @@ export const Book3D = () => {
                     contents={contents}
                     positionZ={-book.baze_z * 0.5}
                 />
-                {Array.from({ length: book.total_leave }).map((_, i) => (
-                    <mesh key={i}>
-                        <Page3D
-                            index={i}
-                            positionZ={book.baze_z * (i + 1)}
-                            projects={[projects[i * 2 - 1], projects[i * 2]]}
-                        />
-                    </mesh>
-                ))}
+                {Array.from({ length: book.total_leave }).map((_, i) => {
+                    const firstIndex = i * 2;
+                    const pair: Project[] = [
+                        projects[firstIndex - 1],
+                        projects[firstIndex],
+                    ];
+                    console.log(`${firstIndex} ${firstIndex + 1}`)
+                    return (
+                        <mesh key={i}>
+                            <Page3D
+                                index={i}
+                                positionZ={book.baze_z * (i + 1)}
+                                projects={pair}
+                            />
+                        </mesh>
+                    );
+                })}
 
                 <ContentsPage3D
                     index={book.total_leave}
