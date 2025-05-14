@@ -1,6 +1,6 @@
 export const SocialLinks = () => {
     return (
-        <div className="flex gap-4">
+        <div className="flex self-center gap-4">
             {/* GitHub */}
             <a
                 href="https://github.com/implObserver"
