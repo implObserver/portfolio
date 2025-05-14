@@ -4,6 +4,7 @@ import { ContactShadows, Environment, Html, Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { useSpring, animated } from '@react-spring/three';
 import { generateRandomText } from '../lib/const/texts';
+import { ToHome } from '../../toHome';
 
 interface FoggySceneProps {
   children: React.ReactNode;
@@ -80,6 +81,9 @@ export const FoggyScene = ({ children }: FoggySceneProps) => {
           position={[0, -0.01, 0]}
         />
       </Canvas>
+      <div style={{ position: 'absolute', left: 0, top: 0, zIndex: 1000 }}>
+        <ToHome />
+      </div>
     </div>
   );
 };

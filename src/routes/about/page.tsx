@@ -1,5 +1,11 @@
 import { SkillsSection } from "@/entitites/skillsPanel";
+import { ToHome } from "@/shared/ui/toHome";
 
 export default function AboutPage() {
-  return <SkillsSection/>;
+  return (
+    <div>
+      <ToHome />
+      <SkillsSection />
+    </div>
+  );
 }

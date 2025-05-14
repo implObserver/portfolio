@@ -1,7 +1,11 @@
 import { SocialLinks } from "@/entitites/contacts";
+import { ToHome } from "@/shared/ui/toHome";
 
 export default function ContactsPage() {
     return (
-        <SocialLinks />
+        <div>
+            <ToHome />
+            <SocialLinks />
+        </div>
     );
 }
