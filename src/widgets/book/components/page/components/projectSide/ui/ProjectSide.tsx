@@ -1,4 +1,3 @@
-import { HoldableLink } from "@/shared/ui/holdableLink";
 import { LitImage } from "@/shared/ui/litImageProps";
 import type { Project } from "@/widgets/book/lib/const/projects";
 import { Text, useTexture } from "@react-three/drei";
@@ -16,19 +15,13 @@ export const ProjectSide = (project: Project, backSide = false) => {
     if (project.type === 'project') {
         return (
             <>
-
-                <HoldableLink
-                    url={project.siteUrl ?? ''} // или другая ссылка, если нужна своя
-                    position={[-2, 1.5, zOffset]}
+                <LitImage
+                    url={project.imageUrl ?? ''}
+                    position={[-2, 1.5, zOffset]} // относительно HoldableLink
                     rotationY={rot}
-                >
-                    <LitImage
-                        url={project.imageUrl ?? ''}
-                        position={[0, 0, 0]} // относительно HoldableLink
-                        rotationY={0}
-                        scale={[3.5, 2.5, backSide ? -1 : 1]}
-                    />
-                </HoldableLink>
+                    scale={[3.5, 2.5, backSide ? -1 : 1]}
+                    onClick={() => window.open(project.siteUrl, '_blank')}
+                />
 
 
                 <mesh position={[-2, -0.06, zOffset]} rotation={[0, rot, 0]} scale={[3.5, 2.5, 1]}>

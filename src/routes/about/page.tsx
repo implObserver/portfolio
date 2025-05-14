@@ -1,3 +1,5 @@
+import { SkillsSection } from "@/entitites/skillsPanel";
+
 export default function AboutPage() {
-  return <h1>О нас</h1>;
+  return <SkillsSection/>;
 }

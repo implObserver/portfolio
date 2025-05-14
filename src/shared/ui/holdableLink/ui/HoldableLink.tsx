@@ -50,7 +50,8 @@ export const HoldableLink = ({ url, children, position, rotationY = 0 }: Holdabl
     };
 
     // Остановить удержание
-    const handlePointerUpOrLeave = () => {
+    const handlePointerUpOrLeave = (e: ThreeEvent<PointerEvent>) => {
+        e.stopPropagation();
         if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
 

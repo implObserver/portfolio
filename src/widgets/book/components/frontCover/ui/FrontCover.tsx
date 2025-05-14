@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { animated, useSpring } from '@react-spring/three';
-import type { ThreeEvent } from '@react-three/fiber';
+import { useLoader, type ThreeEvent } from '@react-three/fiber';
 import { useSelector } from 'react-redux';
 import { bookActions, selectBook } from '@/services/slices/book';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
@@ -10,7 +10,9 @@ export const FrontCover3D = ({ positionZ }: { positionZ: number }) => {
     const book = useSelector(selectBook);
     const dispatch = useAppDispatch();
     const textureRef = useRef<THREE.MeshStandardMaterial>(null!);
-
+    const texture = useLoader(THREE.TextureLoader, "back.png");
+    texture.flipY = false; // важно, иначе будет вверх ногами
+    texture.wrapS = THREE.RepeatWrapping;
     // Загрузка текстуры
     useEffect(() => {
         const loader = new THREE.TextureLoader();
@@ -69,7 +71,7 @@ export const FrontCover3D = ({ positionZ }: { positionZ: number }) => {
                     roughness={0.5}
                     metalness={0.1}
                 />
-                <meshStandardMaterial attach="material-4" color="#888" />
+                <meshStandardMaterial map={texture} attach="material-4" color="#888" />
             </mesh>
         </animated.group>
     );

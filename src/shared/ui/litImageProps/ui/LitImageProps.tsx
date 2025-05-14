@@ -26,7 +26,7 @@ export const LitImage = ({
     onPointerMove,
 }: LitImageProps) => {
     const texture = useLoader(TextureLoader, url);
-
+    
     const material = useMemo(() => {
         return new MeshPhysicalMaterial({
             map: texture,

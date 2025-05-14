@@ -87,6 +87,8 @@ export const ContentsPage3D = ({ positionZ, index, contents }: ContentsPage3DPro
                     return (
                         <group key={i} position={[-2, 1.8 - i * 0.5, zOffset]} rotation-y={rotY}>
                             <Text
+                                onPointerOver={() => (document.body.style.cursor = 'pointer')}
+                                onPointerOut={() => (document.body.style.cursor = 'default')}
                                 position={[-1.8, 0, 0]}
                                 fontSize={0.15}
                                 color="#333"

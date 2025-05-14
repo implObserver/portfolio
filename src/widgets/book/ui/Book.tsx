@@ -27,7 +27,14 @@ export const Book3D = () => {
     const [zoom, setZoom] = useState(1);
     const [rotationY, setRotationY] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
-    const [scale, setScale] = useState(1); // Добавляем состояние для масштаба книги
+    const [scale, setScale] = useState(1);
+
+    // Анимация появления книги (издалека)
+    const { positionZ } = useSpring({
+        from: { positionZ: -20 }, // Начальное положение (далеко от камеры)
+        to: { positionZ: 0 },     // Конечное положение (нормальная позиция)
+        config: { tension: 120, friction: 20 } // Настройки анимации
+    });
 
     const { positionX } = useSpring({
         positionX: book.isOpen
@@ -46,13 +53,12 @@ export const Book3D = () => {
     // === Book scaling based on window size ===
     useEffect(() => {
         const handleResize = () => {
-            // Рассчитываем масштаб в зависимости от ширины экрана
-            const newScale = Math.min(window.innerWidth / 1100, 1); // Ограничиваем масштаб
+            const newScale = Math.min(window.innerWidth / 1100, 1);
             setScale(newScale);
         };
 
-        handleResize(); // Инициализируем масштаб
-        window.addEventListener('resize', handleResize); // Обработчик изменения размера окна
+        handleResize();
+        window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -98,11 +104,11 @@ export const Book3D = () => {
     }, [dispatch]);
 
     return (
-        <group
+        <animated.group
             ref={groupRef}
-            position={[0, 0, 0]}
+            position={positionZ.to(z => [0, 0, z])} // Анимируем позицию по Z
             rotation={[0, rotationY, 0]}
-            scale={scale} // Применяем масштаб
+            scale={scale}
         >
             {book.isOpen && (
                 <ResponsiveSpotLight />
@@ -142,6 +148,6 @@ export const Book3D = () => {
 
                 <FrontCover3D positionZ={book.baze_z * (book.total_leave + 1)} />
             </animated.group>
-        </group>
+        </animated.group>
     );
 };

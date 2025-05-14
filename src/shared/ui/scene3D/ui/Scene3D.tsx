@@ -12,14 +12,14 @@ interface FoggySceneProps {
 export const FoggyScene = ({ children }: FoggySceneProps) => {
   // Конфигурация текста
   const config = useMemo(() => ({
-    numLines: 12,
+    numLines: 6,
     textColor: 'rgba(255, 255, 255, 0.6)',
     minTextSize: 0.5,
-    maxTextSize: 3,
+    maxTextSize: 1.5,
     minSpeed: 0.3,
-    maxSpeed: 1.2,
-    minDelay: 0,
-    maxDelay: 1,
+    maxSpeed: 0.6,
+    minDelay: 0.5,
+    maxDelay: 2,
     canvasWidth: 20,
     canvasHeight: 20,
     zPosition: -5, // Глубина расположения текста
@@ -47,7 +47,7 @@ export const FoggyScene = ({ children }: FoggySceneProps) => {
         }}
       >
         <ambientLight intensity={0.3} />
-        <directionalLight position={[5, 10, 5]} intensity={0.5} castShadow />
+        <directionalLight position={[5, 10, 5]} intensity={0.1} castShadow />
 
         <Suspense fallback={<Html>Загрузка...</Html>}>
           {children}
