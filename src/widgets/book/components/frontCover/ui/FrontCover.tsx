@@ -13,6 +13,7 @@ export const FrontCover3D = ({ positionZ }: { positionZ: number }) => {
     const texture = useLoader(THREE.TextureLoader, "back.png");
     texture.flipY = false; // важно, иначе будет вверх ногами
     texture.wrapS = THREE.RepeatWrapping;
+    texture.repeat.x = -1;
     // Загрузка текстуры
     useEffect(() => {
         const loader = new THREE.TextureLoader();
