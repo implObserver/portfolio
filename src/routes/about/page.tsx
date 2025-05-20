@@ -3,7 +3,7 @@ import { ToHome } from "@/shared/ui/toHome";
 
 export default function AboutPage() {
   return (
-    <div>
+    <div className="flex h-[100vh]">
       <ToHome />
       <SkillsSection />
     </div>

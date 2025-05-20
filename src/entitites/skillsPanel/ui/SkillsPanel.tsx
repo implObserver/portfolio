@@ -1,6 +1,6 @@
 export const SkillsSection = () => {
     return (
-        <section className="mx-auto px-4 py-8 text-white">
+        <section className="flex self-center mx-auto px-4 py-8 text-white">
             <div className="space-y-6">
                 {/* ОС */}
                 <div>
