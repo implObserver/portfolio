@@ -17,7 +17,7 @@ export const BackCover3D = ({ positionZ }: { positionZ: number }) => {
     mirroredTexture.flipY = false;
 
     mirroredTexture.wrapS = mirroredTexture.wrapT = THREE.RepeatWrapping;
-    mirroredTexture.repeat.x = -1; // Зеркалим по горизонтали
+    mirroredTexture.repeat.x = 1; // Зеркалим по горизонтали
 
     // Создаём материалы для всех 6 граней
     const materials = [
@@ -25,8 +25,8 @@ export const BackCover3D = ({ positionZ }: { positionZ: number }) => {
         new THREE.MeshStandardMaterial({ color: "#000000" }), // левая
         new THREE.MeshStandardMaterial({ color: "#000000" }), // верх
         new THREE.MeshStandardMaterial({ color: "#000000" }), // низ
-        new THREE.MeshStandardMaterial({ map: mirroredTexture }),      // фронт (наружная сторона)
-        new THREE.MeshStandardMaterial({ map: texture }), // зад (внутренняя сторона)
+        new THREE.MeshStandardMaterial({ map: texture }),      // фронт (наружная сторона)
+        new THREE.MeshStandardMaterial({ map: mirroredTexture }), // зад (внутренняя сторона)
     ];
 
     const { rotationY, z } = useSpring({
